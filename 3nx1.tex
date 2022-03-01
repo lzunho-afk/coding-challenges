@@ -1,0 +1,98 @@
+\documentclass{article}
+
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{fancyvrb}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  }
+
+\lstset{
+  columns=fullflexible,
+  mathescape=true,
+  literate=
+  {=}{$\leftarrow{}$}{1}
+  {==}{$={}$}{1},
+  morekeywords={if,then,else,return}
+  }
+
+\title{O Problema 3n+1}
+\date{}
+
+\begin{document}
+
+\maketitle
+\begin{center}
+O problema (original em inglês) localiza-se \href{https://onlinejudge.org/external/1/100.pdf}{aqui}.
+\end{center}
+
+\paragraph{}
+Os problemas na Ciência da Computação são frequentemente classificados como pertencendo a determinadas classes.
+Nesse problema você vai analisar a propriedade de um algoritmo cuja classificação não é conhecida por todas
+as entradas possíveis.
+\paragraph{}
+Considere o seguinte algoritmo:
+\begin{lstlisting}
+  input n
+  print n
+  if n == 1 then STOP
+    if n is odd then n = 3n+1
+    else n = n/2
+  GOTO 2
+\end{lstlisting}
+
+\paragraph{}
+Dado 22 como entrada, a saída será a seguinte sequencia de números:
+\begin{center}
+\begin{BVerbatim}
+22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
+\end{BVerbatim}
+\end{center}
+
+\paragraph{}
+Considera-se que o algoritmo acima irá terminar (1 é escrito) para qualquer entrada com valor integro. Apesar da
+simplicidade do algoritmo, não se sabe se esse pressuposto é verdadeiro. Contudo, isso foi verificado para todos
+os inteiros \verb|n|, tal qual \verb|0 < n < 1.000.000| (e para mais muitos valores adiante).
+\paragraph{}
+Dada uma entrada \verb|n|, é possível determinar o número de valores escritos, incluindo o valor 1. Assim, para
+determinado \verb|n|, chama-se \verb|tamanho do ciclo| de \verb|n|. No exemplo acima, o tamanho do ciclo de 22 é 16.
+\paragraph{}
+Para quaisquer dois números \verb|i| e \verb|j|, você deve determinar o tamanho máximo do ciclo de todos os números
+entre \verb|i| e \verb|j|, ambos inclusos.
+
+\section*{Entrada}
+\paragraph{}
+A entrada consiste numa série de pares de números \verb|i,j| (um por linha). Todos os inteiros devem ser menores
+que 10.000 e maiores que 0.
+\paragraph{}
+Você deverá processar todos os pares de inteiros, onde, para cada par, deve-se determinar o tamanho máximo do ciclo
+perante todos os inteiros entre \verb|i| e \verb|j|, inclusos.
+\paragraph{}
+Você pode assumir que nenhuma das operações irá criar um overflow no inteiro de 32 bits.
+
+\section*{Saída}
+\paragraph{}
+Para cada entrada de pares inteiros \verb|i,j| você deve dar como saída \verb|i|, \verb|j| e o tamanho máximo do ciclo para
+os inteiros de \verb|i| até \verb|j|. Esse três números devem ser separados por pelo menos um espaço em branco e
+estarem em linha individual (uma linha de entrada por uma de saída). Os inteiros \verb|i| e \verb|j| devem aparecer
+na saída na mesma ordem na qual eles aparecem na entrada, seguidos, logo em seguida, pelo tamanho máximo do ciclo (mesma linha).
+
+\section*{Exemplo de entrada}
+\begin{BVerbatim}
+  1 10
+  100 200
+  201 210
+  900 1000
+\end{BVerbatim}
+
+\section*{Exemplo de saída}
+\begin{BVerbatim}
+  1 10 20
+  100 200 125
+  201 210 89
+  900 1000 174
+\end{BVerbatim}
+
+\end{document}
