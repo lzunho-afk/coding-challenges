@@ -31,7 +31,7 @@ int main(void) {
         std::cout << "O funcionário tem um novo salário de R$ " << std::fixed << sal << "\n";
         break;
     default:
-        std::cout << "Código invalido!!\n";
+        std::cerr << "Código invalido!!\n";
         return 1;
     }
     return 0;

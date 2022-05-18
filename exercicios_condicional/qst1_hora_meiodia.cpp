@@ -19,7 +19,7 @@ int main(void) {
 
     aux = std::abs(hora - 12);
     if (!(hora >= 0 && hora < 24)) {
-        std::cout << "Hora invalida\n";
+        std::cerr << "Hora invalida\n";
     } else if (hora > 12) {
         std::cout << "Passaram " << std::fixed << aux << " horas do meio-dia\n";
     } else if (hora < 12) {
