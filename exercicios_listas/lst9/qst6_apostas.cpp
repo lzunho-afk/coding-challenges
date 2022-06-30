@@ -24,12 +24,6 @@ int main(void)
     {
       std::cout << "Informe o número " << i+1 << ": ";
       std::cin >> ubet[i];
-
-      for (int j = 0; j < i; j++)
-	{
-	  if (ubet[i] == ubet[j])
-	      std::cerr << "Aposta invalida (valores repetidos)!!!" << std::endl;
-	}
     }
 
   std::cout << "Valores sorteados: " << std::endl;
