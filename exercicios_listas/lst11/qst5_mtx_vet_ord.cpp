@@ -1,6 +1,6 @@
 /*
 Escrever um algoritmo que gere uma matriz M[4][4], intervalo de 0 a 50. A seguir, o algoritmo
-dever·:
+dever√°:
 a) Mostrar a matriz gerada.
 b) Criar um vetor V[16] e copiar os elementos da matriz M para o vetor V.
 c) Mostrar o vetor V em ordem crescente.
