@@ -1,10 +1,3 @@
-/*
-Escreva um programa que manipule um vetor A[10] de números float, os valores para
-preencher o vetor devem ser gerados randomicamente, mostre o vetor gerado na tela, ordenar
-o vetor em ordem crescente e apresentar novamente o vetor na tela, a seguir mostre o vetor
-com valores arredondados para cima, para baixo e seguindo o critério da primeira casa decimal.
-*/
-
 #include <iostream>
 #include <cmath>
 
@@ -27,7 +20,7 @@ int main(void) {
     }
     cout << "}" << endl;
 
-    // Ordenação (crescente)
+    // OrdenaÃ§Ã£o (crescente)
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
             if (vet_a[i] < vet_a[j]) {
@@ -52,7 +45,7 @@ int main(void) {
     }
     cout << "}\n\n";
 
-    // Mostra vetor arrendondado através da PRIMEIRA CASA DECIMAL
+    // Mostra vetor arrendondado atravÃ©s da PRIMEIRA CASA DECIMAL
     cout << "Vet_A(round) => {" << endl;
     for(int i = 0; i < TAM; i++) {
         cout << "\t" << i << ": " << int(round(vet_a[i])) << endl;
