@@ -74,6 +74,7 @@ int main(void) {
 }
 
 void ud_elements_dg(int mtx[TAM][TAM]) {
+    if (!gen) return;
     cout << "> Elementos acima da diagonal principal => {";
     for (int i = 0; i < TAM; i++) {
         for (int j = i + 1; j < TAM; j++) {
@@ -90,6 +91,7 @@ void ud_elements_dg(int mtx[TAM][TAM]) {
 }
 
 bool issimetric(int mtx[TAM][TAM]) {
+    if (!gen) return false;
     int tmtx[TAM][TAM];
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
@@ -107,6 +109,7 @@ bool issimetric(int mtx[TAM][TAM]) {
 }
 
 void most2dg(int mtx[TAM][TAM]) {
+    if (!gen) return;
     int aux, m_index, m_val, amtx[TAM][TAM];
 
     for (int i = 0; i < TAM; i++) {
@@ -133,6 +136,7 @@ void most2dg(int mtx[TAM][TAM]) {
 }
 
 void show_mtx(int mtx[TAM][TAM], string name) {
+    if (!gen) return;
     cout << name << " {" << endl;
     for (int i = 0; i < TAM; i++) {
         cout << "\t{";
@@ -168,7 +172,7 @@ void generate_mtx(int mtx[TAM][TAM]) {
 
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
-            mtx[i][j] = ns[(TAM * i - 1) + j];
+            mtx[i][j] = ns[( i != 0 ? (TAM * i - 1) : 0) + j];
         }
     }
     gen = true;
