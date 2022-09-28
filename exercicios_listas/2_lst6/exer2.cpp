@@ -5,9 +5,9 @@
  * número. O sistema deverá apresentar um menu com as seguintes opções:
  *  1 – Cadastrar contas;
  *  2 – Visualizar dados da conta; (deve ser informado o número da conta)
- *  3 – Depositar; (deve ser informado o número da conta e o valor a ser 
+ *  3 – Depositar; (deve ser informado o número da conta e o valor a ser
  *  depositado)
- *  4 – Sacar; (deve ser informado o número da conta e o valor a ser sacado, 
+ *  4 – Sacar; (deve ser informado o número da conta e o valor a ser sacado,
  *  validar se o saque pode ser realizado ou não)
  *  5 – Pix; (deve ser informado o número da conta de origem, o número da conta
  *  de destino e o valor, existindo saldo na conta de origem o programa deve
@@ -16,12 +16,10 @@
  */
 
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <limits>
+#include <string>
 
 #define CONTAS_BANCO 10
-#define NAME_SIZE 50
 
 using namespace std;
 
@@ -35,87 +33,113 @@ const char* menu = "### Banco (Max: 10 contas) ###\n" \
                    ": ";
 
 struct conta_banco {
-    char nome[NAME_SIZE];
+    string nome;
     double saldo;
     unsigned int num;
 };
 
-void contas_pr(struct conta_banco* contas_ptr) {
-    conta_banco* conta;
-    for (int i = 0; i < CONTAS_BANCO; i++) {
-        conta = contas_ptr + sizeof(struct conta_banco) * (i+1);
-        conta->num = i;
-        conta->saldo = 0.00;
-    }
-}
-
-void cadastrar(struct conta_banco* conta) {
-    char* nome;
-    size_t nome_size = NAME_SIZE;
-    size_t chs_rd;
-
-    nome = (char*) malloc(sizeof(char) * NAME_SIZE);
-    cout << "> Cadastro:" << endl
-        << "\tNome: ";
-    chs_rd = getline(&nome, &nome_size, stdin);
-    strcpy(conta->nome, nome);
-
-    cout << "> Cadastro realizado para \"" << conta->nome << "\" ~> Número da conta => " << conta->num << endl;
-}
-
-void mostrar_conta(struct conta_banco* conta) {
-    cout.precision(2);
-    cout << endl << "\t~> Conta em nome de " << conta->nome << endl
-        << "\tSaldo => " << fixed << conta->saldo << endl
-        << "\tNúmero da conta => " << conta->num << endl << endl;
-}
-
-void visualizar(struct conta_banco* contas_ptr) {
-    conta_banco* conta;
-    int conta_num;
-    int ver_count = 0;
-    
-    cout << "> Informe o número da conta: ";
-    cin >> conta_num;
-
-    for (int i = 0; i < CONTAS_BANCO; i++) {
-        conta = contas_ptr + sizeof(struct conta_banco) * (i+1);
-        if (conta->num == conta_num) {
-            mostrar_conta(conta);
-            return;
-        }
-    }
-    cerr << "> Conta não encontrada!" << endl;
+void visualizar(struct conta_banco& conta_ptr) {
+    cout << "> Conta número " << conta_ptr.num << " em nome de " << conta_ptr.nome << endl
+        << "\tSaldo -> " << conta_ptr.saldo << endl;
 }
 
 int main(void) {
     setlocale(LC_ALL, "Portuguese");
     struct conta_banco contas[CONTAS_BANCO];
-    unsigned int banco_count = 0;
-    int es;
+    string nome;
+    unsigned int conta_num, conta_num2;
+    long double val;
+    short es;
     bool run = true;
+    bool cad_ft = false;
 
-    contas_pr(&(contas[0]));
     while (run) {
         cout << menu;
         cin >> es;
 
         switch(es) {
             case 1:
-                cadastrar(&(contas[banco_count]));
-                banco_count++;
+                for (int i = 0; i < CONTAS_BANCO; i++) {
+                    cout << "> [" << i+1 << "] Informe o nome: ";
+                    getline(cin, nome);
+                    if (i == 0) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<int>::max(), '\n');
+                    }
+                    contas[i].nome = nome;
+                    contas[i].num = i + 1;
+                    contas[i].saldo = 0.00;
+                }
+                cad_ft = true;
                 break;
             case 2:
-                visualizar(&(contas[0]));
+                if (cad_ft) {
+                    cout << "> Informe o número da conta: ";
+                    cin >> conta_num;
+                    if (conta_num >= 1 && conta_num <= 10) {
+                        visualizar(contas[conta_num-1]);
+                    } else {
+                        cerr << "> Número de conta invalido!" << endl;
+                    }
+                } else {
+                    cerr << "> Contas ainda não cadastradas!" << endl;
+                }
                 break;
             case 3:
-                depositar();
+                if (cad_ft) {
+                    cout << "> Informe o número da conta: ";
+                    cin >> conta_num;
+                    cout << "> Informe o valor a ser depositado: ";
+                    cin >> val;
+                    if (conta_num >= 1 && conta_num <= 10) {
+                        contas[conta_num - 1].saldo += val;
+                    } else {
+                        cerr << "> Número de conta invalido!" << endl;
+                    }
+                } else {
+                    cerr << "> Contas ainda não cadastradas!" << endl;
+                }
                 break;
             case 4:
-                sacar();
+                if (cad_ft) {
+                    cout << "> Informe o número da conta: ";
+                    cin >> conta_num;
+                    cout << "> Informe o valor a ser sacado: ";
+                    cin >> val;
+                    if (conta_num >= 1 && conta_num <= 10) {
+                        if (contas[conta_num - 1].saldo >= val) {
+                            contas[conta_num - 1].saldo -= val;
+                        } else {
+                            cerr << "> Saldo insuficiente!" << endl;
+                        }
+                    } else {
+                        cerr << "> Número de conta invalido!" << endl;
+                    }
+                } else {
+                    cerr << "> Contas ainda não cadastradas!" << endl;
+                }
                 break;
             case 5:
-                pix();
+                if (cad_ft) {
+                    cout << "> Informe o número da conta de origem: ";
+                    cin >> conta_num;
+                    cout << "> Informe o número da conta de destino: ";
+                    cin >> conta_num2;
+                    cout << "> Informe o valor do pix: ";
+                    cin >> val;
+                    if ((conta_num >= 1 && conta_num <= 10) && (conta_num2 >= 1 && conta_num2 <= 10)) {
+                        if (contas[conta_num - 1].saldo >= val) {
+                            contas[conta_num - 1].saldo -= val;
+                            contas[conta_num2 - 1].saldo += val;
+                        } else {
+                            cerr << "> Saldo insuficiente!" << endl;
+                        }
+                    } else {
+                        cerr << "> Número de conta invalido!" << endl;
+                    }
+                } else {
+                    cerr << "> Contas ainda não cadastradas!" << endl;
+                }
                 break;
             case 6:
                 run = false;
@@ -125,6 +149,5 @@ int main(void) {
                 break;
         }
     }
-
     return 0;
 }
