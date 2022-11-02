@@ -8,13 +8,13 @@
 
 using namespace std;
 
-void tempo_volta(int **ptr, int ct) {
+void tempo_volta(int *ptr, int ct) {
   int n;
   cout << "> Tempo número " << ct << ": ";
   cin >> n;
 
-  if (n > **ptr) {
-    **ptr = n;
+  if (n > *ptr) {
+    *ptr = n;
   }
 }
 
@@ -27,7 +27,7 @@ int main(void) {
 
   val = &mvt;
   for (int i = 0; i < n; i++) {
-    tempo_volta(&val, i+1);
+    tempo_volta(val, i+1);
   }
   cout << "A maior volta é " << *val << endl;
   
