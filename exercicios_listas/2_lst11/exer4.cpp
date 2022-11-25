@@ -14,7 +14,7 @@
 #include <locale>
 #include <fstream>
 
-#define FILEPATH "números.txt"
+#define FILEPATH "numeros.txt"
 #define MTX_SIZE 5
 
 using namespace std;
@@ -30,6 +30,7 @@ void dig_principal(int mtx[MTX_SIZE][MTX_SIZE]) {
     for (int i = 0; i < MTX_SIZE; i++) {
         cout << '\t' << mtx[i][i] << '\n';
     }
+    cout << "}\n";
 }
 
 void dig_secundaria(int mtx[MTX_SIZE][MTX_SIZE]) {
@@ -37,10 +38,40 @@ void dig_secundaria(int mtx[MTX_SIZE][MTX_SIZE]) {
     for (int i = 0; i < MTX_SIZE; i++) {
         cout << '\t' << mtx[i][MTX_SIZE - (i + 1)] << '\n';
     }
+    cout << "}\n";
 }
 
 void mostrar_stats(int mtx[MTX_SIZE][MTX_SIZE]) {
+    // Mostrando a Matriz
+    cout << "-> Matriz:\n";
+    for (int i = 0; i < MTX_SIZE; i++) {
+        for (int j = 0; j < MTX_SIZE; j++) {
+            cout << '\t' << mtx[i][j] << ", ";
+        }
+        cout << '\n';
+    }
 
+    // Elementos acima da diagonal principal
+    cout << "-> Elemento ACIMA da diagonal principal => (";
+    for (int i = 0; i < MTX_SIZE; i++) {
+        for (int j = 0; j < MTX_SIZE; j++) {
+            if (i < j) {
+                cout << mtx[i][j] << ',';
+            }
+        }
+    }
+    cout << ")\n";
+
+    // Elementos abaixo da diagonal principal
+    cout << "-> Elemento ABAIXO da diagonal principal => (";
+    for (int i = 0; i < MTX_SIZE; i++) {
+        for (int j = 0; j < MTX_SIZE; j++) {
+            if (i > j) {
+                cout << mtx[i][j] << ',';
+            }
+        }
+    }
+    cout << ")\n";
 }
 
 int main(void) {
