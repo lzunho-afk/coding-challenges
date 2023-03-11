@@ -26,22 +26,22 @@ const char *menu = "\n### Distribuição - PAR/IMPAR ###\n"   \
 int main(void) {
     setlocale(LC_ALL, "Portuguese");
 
-    Stack* origin = new Stack;
-    Stack* pares = new Stack;
-    Stack* impares = new Stack;
+    Stack<int> origin;
+    Stack<int> pares;
+    Stack<int> impares;
     string s;
     int tam, aux, val;
 
-    start_stack(origin, MAX_TAM_STACK);
-    start_stack(pares, MAX_TAM_STACK);
-    start_stack(impares, MAX_TAM_STACK);
+    origin.start_stack(MAX_TAM_STACK);
+    pares.start_stack(MAX_TAM_STACK);
+    impares.start_stack(MAX_TAM_STACK);
 
     cout << "### Inserção dos valores - MAX_" << MAX_TAM_STACK << " ###\n";
     int c = 0;
     cout << "\tValor " << c << ": ";
     while (getline(cin, s)) {
         if (stringstream(s) >> aux && c < 6) {
-            push_stack(origin, aux);
+            origin.push_stack(aux);
         } else {
             break;
         }
@@ -55,26 +55,26 @@ int main(void) {
 
         switch(aux) {
         case 1:
-            val = pop_stack(origin);
+            val = origin.pop_stack();
             if (val % 2 == 0) {
-                push_stack(pares, val);
+                pares.push_stack(val);
             } else {
-                push_stack(impares, val);
+                impares.push_stack(val);
             }
             break;
         case 2:
-            show_stack(origin);
+            origin.show_stack();
             break;
         case 3:
-            show_stack(pares);
+            pares.show_stack();
             break;
         case 4:
-            show_stack(impares);
+            impares.show_stack();
             break;
         case 5:
-            make_stack_empty(origin);
-            make_stack_empty(pares);
-            make_stack_empty(impares);
+            origin.make_stack_empty();
+            pares.make_stack_empty();
+            impares.make_stack_empty();
 
             cout << "----> Valores limpos... <----\n";
             cout << "### Inserção dos valores - MAX_" << MAX_TAM_STACK << " ###\n";
@@ -83,7 +83,7 @@ int main(void) {
             cin.ignore();
             while (getline(cin, s)) {
                 if (stringstream(s) >> aux && c < 6) {
-                    push_stack(origin, aux);
+                    origin.push_stack(aux);
                 } else {
                     break;
                 }

@@ -6,94 +6,75 @@
 
 using namespace std;
 
-typedef int Node;
-
-typedef struct stack {
-    Node* p_node;
+template <typename T>
+struct Stack {
+    T *p_node;
     int top;
     int tam;
     int base;
-} Stack;
 
-// Reseta pilha
-void make_stack_empty(Stack* p_stack) {
-    p_stack->p_node = new Node[p_stack->tam];
-    p_stack->top = -1;
-    p_stack->base = -1;
-}
-
-// Start da pilha
-void start_stack(Stack* p_stack, int tam) {
-    p_stack->tam = tam;
-    make_stack_empty(p_stack);
-}
-
-bool push_stack(Stack* p_stack, int n) {
-    int aux;
-    if (p_stack->top == p_stack->tam - 1) {
-        cerr << "> Err. Pilha cheia\n";
-        return false;
+    // Reseta pilha
+    void make_stack_empty() {
+        this->p_node = new T[this->tam];
+        this->top = -1;
+        this->base = -1;
     }
-    p_stack->top++;
-    *(p_stack->p_node + p_stack->top) = n;
-    return true;
-}
 
-int pop_stack(Stack* p_stack) {
-    int aux;
-    if (p_stack->top == p_stack->base) {
-        cerr << "> Err. Pilha vazia\n";
+    // Start da pilha
+    void start_stack(int tam) {
+        this->tam = tam;
+        make_stack_empty();
     }
-    aux = *(p_stack->p_node + p_stack->top);
-    p_stack->top--;
-    return aux;
-}
 
-bool peek_stack(Stack* p_stack) {
-    if (p_stack->top == p_stack->base) {
-        cerr << "> Não há valores na pilha!\n";
-        return false;
-    }
-    cout << "O elemento presente no topo é \"" << *(p_stack->p_node + p_stack->top) << "\"\n";
-    return true;
-}
-
-bool isempty_stack(Stack* p_stack) {
-    if (p_stack->top == p_stack->base) return true;
-    else return false;
-}
-
-void show_stack(Stack* p_stack) {
-    if(!isempty_stack(p_stack)) {
-        cout << "   ------------" << endl;
-        for(int i = p_stack->top; i > p_stack->base; i--){
-            cout << setfill(' ') << std::setw(3) << i << "|";
-            cout << setfill(' ') << std::setw(10) << *(p_stack->p_node + i) << "|" << endl;
-            cout << "   ------------" << endl;
+    bool push_stack(T n) {
+        if (this->top == this->tam - 1) {
+            cerr << "> Err. Pilha cheia\n";
+            return false;
         }
+        this->top++;
+        *(this->p_node + this->top) = n;
+        return true;
     }
-}
 
-// Retorna o VALOR da posição passada como argumento
-int search_stack_pos(Stack* p_stack, int pos) {
-    if (pos > p_stack->base && pos <= p_stack->top) {
-        pos = *(p_stack->p_node + pos);
-        return pos;
+    T pop_stack() {
+        T aux;
+        if (this->top == this->base) {
+            cerr << "> Err. Pilha vazia\n";
+        }
+        aux = *(this->p_node + this->top);
+        this->top--;
+        return aux;
     }
-    return -1;
-}
 
-// Retorna a POSIÇÃO do valor passado como argumento
-bool search_stack_val(Stack* p_stack, int* val) {
-    if (!isempty_stack(p_stack)) {
-        for (int i = p_stack->top; i > p_stack->base; i--) {
-            if (*(p_stack->p_node + i) == *val) {
-                *val = i;
-                return true;
+    bool peek_stack() {
+        if (this->top == this->base) {
+            cerr << "> Não há valores na pilha!\n";
+            return false;
+        }
+        cout << "O elemento presente no topo é \"" << *(this->p_node + this->top) << "\"\n";
+        return true;
+    }
+
+    void show_stack() {
+        if(!(this->top == this->base)) {
+            cout << "   ------------" << endl;
+            for(int i = this->top; i > this->base; i--){
+                cout << setfill(' ') << std::setw(3) << i << "|";
+                cout << setfill(' ') << std::setw(10) << *(this->p_node + i) << "|" << endl;
+                cout << "   ------------" << endl;
             }
         }
     }
-    return false;
-}
+
+    // Retorna o VALOR da posição passada como argumento
+    T search_stack_pos(int pos) {
+        T aux;
+        if (pos > this->base && pos <= this->top) {
+            aux = *(this->p_node + pos);
+            return aux;
+        }
+        return NULL;
+    }
+};
 
 #endif // PILHA_ESTATICA_HPP
