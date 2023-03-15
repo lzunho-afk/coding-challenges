@@ -94,7 +94,7 @@ void show(Stack* p) {
 
 // Destroi os dados presentes na pilha
 void destroy(Stack* p) {
-    int data;
+    char data;
     while(!is_empty_stack(p)) {
         data = pop(p);
     }
