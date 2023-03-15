@@ -51,10 +51,10 @@ bool pop_stack(Stack* p_stack) {
 
 bool peek_stack(Stack* p_stack) {
     if (p_stack->top == p_stack->base) {
-        cerr << "> N„o h· valores na pilha!\n";
+        cerr << "> N√£o h√° valores na pilha!\n";
         return false;
     }
-    cout << "O elemento presente no topo È \"" << *(p_stack->p_node + p_stack->top) << "\"\n";
+    cout << "O elemento presente no topo √© \"" << *(p_stack->p_node + p_stack->top) << "\"\n";
     return true;
 }
 
@@ -74,7 +74,7 @@ void show_stack(Stack* p_stack) {
     }
 }
 
-// Retorna o VALOR da posiÁ„o passada como argumento
+// Retorna o VALOR da posi√ß√£o passada como argumento
 int search_stack_pos(Stack* p_stack, int pos) {
     if (pos > p_stack->base && pos <= p_stack->top) {
         pos = *(p_stack->p_node + pos);
@@ -83,7 +83,7 @@ int search_stack_pos(Stack* p_stack, int pos) {
     return -1;
 }
 
-// Retorna a POSI«√O do valor passado como argumento
+// Retorna a POSI√á√ÉO do valor passado como argumento
 int search_stack_val(Stack* p_stack, int val) {
     if (!isempty_stack(p_stack)) {
         for (int i = p_stack->top; i > p_stack->base; i--) {
