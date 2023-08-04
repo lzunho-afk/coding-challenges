@@ -69,3 +69,8 @@ dkms.conf
 
 # virtual machine crash logs
 hs_err_pid*
+
+##########################
+## Documentation ignore ##
+##########################
+docs/
