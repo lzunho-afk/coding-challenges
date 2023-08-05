@@ -1,6 +1,6 @@
 /**
-   \file raiz_quadrada_heron.c
-   \brief Algoritmo com os passos descritos por Heron de Alexandria para cálcular a raiz quadrada.
+   @file raiz_quadrada_heron.c
+   @brief Algoritmo com os passos descritos por Heron de Alexandria para cálcular a raiz quadrada.
 
    O algoritmo se baseia em cálculos sucessivos para se aproximar cada vez mais do valor exato.
    Primeiramente, chutamos um valor baixo "n" levando em consideração a raiz posta de "x" (nesse
@@ -30,17 +30,16 @@ int main(int argc, char **argv) {
     // Cabeçalho do programa & Licença completa
     printf("%s -- Raiz quadrada aos passos de Heron de Alexandria\n%s\n", PROGRAM_VERSION, COPYRIGHT_LINE);
 
+    // uinput
     printf("Raíz quadrada a ser calculada: ");
     scanf("%lf", &x);
-    if (verbose_opt) {
-	while (n * n != x) {
+
+    // Cálculo
+    n = (n+x/n)/2;
+    while (n * n - x > 0.000001) {
+	if (verbose_opt)
 	    printf("[VERBOSE] %lf * %lf falhou! Tentando a próxima média...\n", n, n);
-	    n = (n+x/n)/2;
-	}
-    } else {
-	while (n * n != x) {
-	    n = (n+x/n)/2;
-	}
+	n = (n+x/n)/2;
     }
     printf("~> O valor da raiz é %lf.\n", n);
     return 0;
