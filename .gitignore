@@ -74,3 +74,6 @@ hs_err_pid*
 ## Documentation ignore ##
 ##########################
 docs/
+
+# zipping
+*.zip
