@@ -18,8 +18,13 @@
 import string
 import sys
 
-## Dicionário utilizado para armazenar as letras e suas frequências.
+## @var dict $freq
+# Dicionário utilizado para armazenar as letras e suas frequências.
 freq = dict()
+
+## @var set $ascii_chars 
+# Conjunto com todas as letras do alfabeto (ASCII) na forma minuscula.
+ascii_chars = set(string.ascii_lowercase)
 
 ##
 # @fn get_text
@@ -64,8 +69,10 @@ else:
 
 # Contagem de chars
 char_vals(text)
+used_chars = set(freq.keys())
+unused_chars = ascii_chars - used_chars
 
 # stdout
 for k in sorted(freq.keys()):
     print("{} => {}".format(k, freq[k]))
-
+print("Letras usadas\t\t=>\t{}\nLetras não usadas\t=>\t{}".format(used_chars, unused_chars))
