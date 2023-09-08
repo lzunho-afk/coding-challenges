@@ -54,6 +54,12 @@ def get_text(filepath, verbose=True):
 # @param[in, out] freq Valores de frequência de cada char presente no texto.
 def char_vals(text):
     global freq
+    
+    # Removendo pontuação
+    for p in string.punctuation:
+        text = text.replace(p, "")
+
+    # Contagem
     for ch in text:
         if ch == " ": continue
         if ch not in freq:
