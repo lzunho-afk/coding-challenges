@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- Coding: utf-8 -*-
 
-##
+## 
 # @file maiorde3_semif.py
 # @brief Algoritmos para verificar o maior valor de 3 valores sem usar `if`.
 # 
@@ -13,9 +13,7 @@
 
 import sys
 
-##
-# @fn met1
-# @brief Calcula o maior de dois números (Método 1).
+## Calcula o maior de dois números (Método 1).
 #
 # O cálculo do maior valor é feito pela soma da média entre os dois valores
 # com a metade do valor de distância entre os dois números.
@@ -27,9 +25,7 @@ def met1(n1, n2):
     maior = (n1+n2)/2 + (((n1-n2)**2)**0.5)/2
     return maior
 
-##
-# @fn met2
-# @brief Calcula o maior de dois números (método 2).
+## Calcula o maior de dois números (método 2).
 #
 # O cálculo do maior valor é feito pela multiplicação de cada um dos valores
 # passados pela conversão em booleano do número pelo outro número.

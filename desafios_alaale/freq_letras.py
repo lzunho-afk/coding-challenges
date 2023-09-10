@@ -2,7 +2,7 @@
 # -*- Coding: utf-8 -*-
 # MIT (c) Lucas Zunho <lucaszunho17@gmail.com>
 
-##
+## 
 # @file freq_letras.py
 # @brief Contagem de frequência das letras de um texto.
 #
@@ -30,9 +30,7 @@ ascii_chars = set(string.ascii_lowercase)
 # Alterna a verificação de frequência das palavras do texto.
 bl_words = True
 
-##
-# @fn get_text
-# @brief Carrega um arquivo de texto e retorna seu conteúdo.
+## Carrega um arquivo de texto e retorna seu conteúdo.
 # 
 # A função carrega todos os chars do arquivo texto de entrada e
 # concatena em uma única string, removendo as quebras de linha.
@@ -50,9 +48,7 @@ def get_text(filepath, verbose=True):
             text += line.lower()
     return text
 
-##
-# @fn char_vals
-# @brief Contagem das letras e adição no dicionário.
+## Contagem das letras e adição no dicionário.
 # 
 # @param text Texto para ser verificado.
 # @param[in, out] freq Valores de frequência de cada char presente no texto.
@@ -64,9 +60,7 @@ def char_vals(text):
             freq[ch] = 0
         freq[ch] += 1
 
-##
-# @fn word_vals
-# @brief Contagem de palavras e adição no dicionário.
+## Contagem de palavras e adição no dicionário.
 # 
 # @param text Texto para ser verificado.
 # @param[in,out] freq Valores de frequência das palavras.
